@@ -16,9 +16,9 @@ const Dashboard = () => {
       {/* Navbar */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center">
-          <img src="/src/assets/ziingLogo.png" alt="Ziing Logo" className="h-8 w-auto" />
+          <img src="/ziingLogo.png" alt="Ziing Logo" className="h-8 w-auto" />
         </div>
-        <button 
+        <button
           onClick={handleLogout}
           className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors cursor-pointer"
         >
@@ -29,8 +29,8 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 w-full bg-white relative overflow-hidden">
-        <iframe 
-          src="/mckesson.html" 
+        <iframe
+          src="/mckesson.html"
           title="McKesson Optimizer Dashboard"
           className="w-full h-full border-0 absolute inset-0"
         />
