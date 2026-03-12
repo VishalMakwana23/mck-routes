@@ -1,10 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 html, body, #root {
   height: 100%;
+}
+
+:root {
+  color-scheme: light;
+  --font-sans: 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg-app: #f5f1ea;
+  --bg-muted: #ede7dd;
+  --bg-elevated: rgba(255, 255, 255, 0.88);
+  --bg-strong: #ffffff;
+  --bg-accent-soft: #ddeee7;
+  --bg-dark: #0a4a48;
+  --border-soft: rgba(15, 94, 92, 0.1);
+  --border-strong: rgba(15, 94, 92, 0.16);
+  --text-strong: #10211d;
+  --text-base: #31433e;
+  --text-muted: #687a74;
+  --text-inverse: #f9f7f2;
+  --brand: #0F5E5C;
+  --brand-strong: #0a4a48;
+  --brand-soft: #d8ebe5;
+  --brand-ring: rgba(15, 94, 92, 0.16);
+  --accent-orange: #F57C00;
+  --danger: #cf4f45;
+  --warning: #b57a2c;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --shadow-soft: 0 12px 40px rgba(20, 36, 32, 0.08);
+  --shadow-card: 0 24px 60px rgba(20, 36, 32, 0.12);
+  --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.45) inset;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #ffffff;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 35%),
+    radial-gradient(circle at top right, rgba(216, 235, 229, 0.85), transparent 30%),
+    linear-gradient(180deg, #faf7f2 0%, var(--bg-app) 100%);
+  color: var(--text-strong);
+}
+
+body::selection {
+  background: rgba(29, 107, 93, 0.16);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
 }

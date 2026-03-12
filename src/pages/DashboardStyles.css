@@ -239,6 +239,9 @@
     border-radius: 50%;
     box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0,0,0,0.05);
   }
+  .color-swatch.swatch-toggle { cursor: pointer; transition: opacity 0.2s; }
+  .color-swatch.swatch-toggle.hidden { opacity: 0.4; }
+  .panel-header-actions { display: flex; align-items: center; gap: 8px; }
 
   /* ═══ RIGHT PANE (MAP) ═══ */
   .right-pane {
@@ -290,27 +293,25 @@
   .split-container.map-expanded .route-row td { display: none; border: none; padding: 0; }
   /* Chevron: top-right */
   .split-container.map-expanded .route-row td:nth-child(1) { display: block; position: absolute; right: 8px; top: 10px; font-size: 14px; color: #aaa; }
-  /* Checkbox: left side */
+  /* Color swatch: visibility toggle */
   .split-container.map-expanded .route-row td:nth-child(2) { display: block; position: absolute; left: 10px; top: 12px; }
-  /* Color swatch: beside checkbox */
-  .split-container.map-expanded .route-row td:nth-child(3) { display: block; position: absolute; left: 10px; top: 30px; }
   /* ID: card title */
-  .split-container.map-expanded .route-row td:nth-child(4) { display: block; font-weight: 700; font-size: 13px; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--bg-main); }
+  .split-container.map-expanded .route-row td:nth-child(3) { display: block; font-weight: 700; font-size: 13px; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--bg-main); }
   /* Stops */
-  .split-container.map-expanded .route-row td:nth-child(7) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(7):before { content: 'Stops: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(6) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(6):before { content: 'Stops: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Distance */
-  .split-container.map-expanded .route-row td:nth-child(8) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(8):before { content: 'Dist: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(7) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(7):before { content: 'Dist: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Run Time (Hours) */
-  .split-container.map-expanded .route-row td:nth-child(9) { display: inline-block !important; width: 100%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(9):before { content: 'Hrs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(8) { display: inline-block !important; width: 100%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(8):before { content: 'Hrs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Weight */
-  .split-container.map-expanded .route-row td:nth-child(11) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(11):before { content: 'Wt: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(10) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(10):before { content: 'Wt: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Pieces */
-  .split-container.map-expanded .route-row td:nth-child(13) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(13):before { content: 'Pcs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(12) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(12):before { content: 'Pcs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Details rows in expanded mode */
   .split-container.map-expanded .details-row { display: none; }
   .split-container.map-expanded .details-row.open { display: block; margin: 0 8px 6px 8px; }

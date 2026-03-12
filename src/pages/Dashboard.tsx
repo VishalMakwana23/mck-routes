@@ -1,6 +1,6 @@
-import { useAuth } from '../context/AuthContext';
 import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -12,29 +12,30 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col font-['Montserrat',sans-serif]">
-      {/* Navbar */}
-      <nav className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
-        <div className="flex items-center">
-          <img src="/src/assets/ziingLogo.png" alt="Ziing Logo" className="h-8 w-auto" />
+    <div className="flex h-screen w-screen flex-col overflow-hidden bg-app-bg">
+      <nav className="relative z-10 flex w-full items-center justify-between border-b border-stroke-soft bg-[rgba(255,255,255,0.78)] px-4 py-3 backdrop-blur sm:px-6">
+        <div className="flex items-center gap-3 shrink-0">
+          <img src="/ziing-logo.png" alt="ziing.ai" className="h-9 w-auto object-contain" />
         </div>
-        <button 
-          onClick={handleLogout}
-          className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors cursor-pointer"
-        >
-          <LogOut size={16} />
-          Logout
-        </button>
+
+        <div className="flex items-center gap-3 shrink-0">
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center gap-2 rounded-full border border-stroke-soft bg-white px-4 py-2.5 text-sm font-semibold text-ink-base shadow-soft transition hover:-translate-y-0.5 hover:border-danger hover:text-danger focus:outline-none focus:ring-4 focus:ring-brand-ring cursor-pointer"
+          >
+            <LogOut size={16} />
+            Logout
+          </button>
+        </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="flex-1 w-full bg-white relative overflow-hidden">
-        <iframe 
-          src="/mckesson.html" 
+      <div className="min-h-0 flex-1 overflow-hidden">
+        <iframe
+          src="/mckesson.html"
           title="McKesson Optimizer Dashboard"
-          className="w-full h-full border-0 absolute inset-0"
+          className="h-full w-full border-0"
         />
-      </main>
+      </div>
     </div>
   );
 };

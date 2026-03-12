@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Legacy reference copy: the live iframe dashboard runs from public/mckesson.html. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -242,6 +243,8 @@
   
   .stops-table th { background: #f8fafc; font-size: 9px; padding: 8px; }
   .stops-table td { padding: 8px; font-size: 11px; }
+  .stops-table tbody tr { transition: background 0.15s ease; }
+  .stops-table tbody tr:hover { background-color: var(--bg-hover) !important; }
 
   .col-num { font-family: 'JetBrains Mono', monospace; text-align: right; font-size: 11px; }
   .color-swatch {
@@ -250,6 +253,9 @@
     border-radius: 50%;
     box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0,0,0,0.05);
   }
+  .color-swatch.swatch-toggle { cursor: pointer; transition: opacity 0.2s; }
+  .color-swatch.swatch-toggle.hidden { opacity: 0.4; }
+  .panel-header-actions { display: flex; align-items: center; gap: 8px; }
 
   /* ═══ RIGHT PANE (MAP) ═══ */
   .right-pane {
@@ -301,27 +307,25 @@
   .split-container.map-expanded .route-row td { display: none; border: none; padding: 0; }
   /* Chevron: top-right */
   .split-container.map-expanded .route-row td:nth-child(1) { display: block; position: absolute; right: 8px; top: 10px; font-size: 14px; color: #aaa; }
-  /* Checkbox: left side */
+  /* Color swatch: visibility toggle */
   .split-container.map-expanded .route-row td:nth-child(2) { display: block; position: absolute; left: 10px; top: 12px; }
-  /* Color swatch: beside checkbox */
-  .split-container.map-expanded .route-row td:nth-child(3) { display: block; position: absolute; left: 10px; top: 30px; }
   /* ID: card title */
-  .split-container.map-expanded .route-row td:nth-child(4) { display: block; font-weight: 700; font-size: 13px; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--bg-main); }
+  .split-container.map-expanded .route-row td:nth-child(3) { display: block; font-weight: 700; font-size: 13px; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--bg-main); }
   /* Stops */
-  .split-container.map-expanded .route-row td:nth-child(7) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(7):before { content: 'Stops: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(6) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(6):before { content: 'Stops: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Distance */
-  .split-container.map-expanded .route-row td:nth-child(8) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(8):before { content: 'Dist: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(7) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(7):before { content: 'Dist: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Run Time (Hours) */
-  .split-container.map-expanded .route-row td:nth-child(9) { display: inline-block !important; width: 100%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(9):before { content: 'Hrs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(8) { display: inline-block !important; width: 100%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(8):before { content: 'Hrs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Weight */
-  .split-container.map-expanded .route-row td:nth-child(11) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(11):before { content: 'Wt: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(10) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(10):before { content: 'Wt: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Pieces */
-  .split-container.map-expanded .route-row td:nth-child(13) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
-  .split-container.map-expanded .route-row td:nth-child(13):before { content: 'Pcs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
+  .split-container.map-expanded .route-row td:nth-child(12) { display: inline-block; width: 48%; font-size: 11px; padding: 1px 0; }
+  .split-container.map-expanded .route-row td:nth-child(12):before { content: 'Pcs: '; color: var(--text-muted); font-weight: 500; font-size: 10px; }
   /* Details rows in expanded mode */
   .split-container.map-expanded .details-row { display: none; }
   .split-container.map-expanded .details-row.open { display: block; margin: 0 8px 6px 8px; }
@@ -338,7 +342,6 @@
 <div class="dashboard-toolbar">
   <div class="brand">
     <span class="brand-title">McKesson Optimizer</span>
-    <span class="brand-subtitle">Dispatch Intelligence</span>
   </div>
   
   <div class="metrics-container" id="metricsRow">
@@ -380,12 +383,10 @@
     <div class="panel active" id="tab-dashboard">
       <div class="panel-header">
         <span>Route Summary & Sequence Info</span>
-        <div>
-           <label class="hide-on-expand" style="margin-right: 12px; cursor: pointer; font-weight: normal; text-transform: none;">
-             <input type="checkbox" id="checkAllRoutesHeader" checked title="Toggle all routes" onchange="document.getElementById('checkAllRoutes').click();" style="vertical-align: middle;">
-             All
-           </label>
-           <span id="routeTotals" style="font-weight: normal; text-transform: none;"></span>
+        <div class="panel-header-actions">
+           <button type="button" class="panel-btn visibility-btn" id="btnShowAll" title="Show all routes on map">Show all</button>
+           <button type="button" class="panel-btn visibility-btn" id="btnHideAll" title="Hide all routes from map">Hide all</button>
+           <span id="routeTotals" style="font-weight: normal; text-transform: none; margin-left: 8px;"></span>
         </div>
       </div>
       <div class="grid-container">
@@ -393,7 +394,6 @@
           <thead>
             <tr>
               <th style="width: 24px;"></th> <!-- Expand chevron -->
-              <th class="checkbox-cell" style="width: 24px;"><input type="checkbox" id="checkAllRoutes" checked title="Toggle all routes"></th>
               <th style="width: 40px;">Color</th>
               <th style="width: 60px; cursor:pointer;" onclick="sortTable('id')" data-col="id">ID<span class="sort-arrow">↕</span></th>
               <th style="width: 70px; cursor:pointer;" class="hide-on-expand" onclick="sortTable('start')" data-col="start">Start<span class="sort-arrow">↕</span></th>
@@ -597,7 +597,7 @@ function init() {
   // Table footer totals mapped to columns
   document.getElementById('routeTableFoot').innerHTML = `
     <tr style="background:var(--bg-main); font-weight:700; border-top:2px solid var(--accent); color:var(--text-primary);">
-      <td colspan="6" style="text-align:right; padding-right:16px; border:none;">TOTALS</td>
+      <td colspan="5" style="text-align:right; padding-right:16px; border:none;">TOTALS</td>
       <td class="col-num" style="border:none;">${fmtNum(totalStops)}</td>
       <td class="col-num" style="border:none;">${fmtNum(totalDist)}</td>
       <td class="col-num" style="border:none;">${Math.floor((totalRun+totalSvc)/60)}h ${Math.round((totalRun+totalSvc)%60)}m</td>
@@ -613,13 +613,14 @@ function init() {
   renderRouteTable();
   renderUnassignedTable();
   
-  // Event listeners for toggle all
-  document.getElementById('checkAllRoutes').addEventListener('change', function(e) {
-      const isChecked = e.target.checked;
-      ROUTES.forEach(r => toggleRouteVisibility(r.vehicle_id, isChecked));
-      // Re-render table checkboxes
-      const cbs = document.querySelectorAll('.route-cb');
-      cbs.forEach(cb => cb.checked = isChecked);
+  // Event listeners for Show all / Hide all
+  document.getElementById('btnShowAll').addEventListener('click', function() {
+      ROUTES.forEach(r => toggleRouteVisibility(r.vehicle_id, true));
+      renderRouteTable();
+  });
+  document.getElementById('btnHideAll').addEventListener('click', function() {
+      ROUTES.forEach(r => toggleRouteVisibility(r.vehicle_id, false));
+      renderRouteTable();
   });
 
   if (ROUTES.length > 0) {
@@ -745,14 +746,14 @@ function renderRouteTable() {
         const chevron = isOpen ? '▼' : '▶';
         const openClass = isOpen ? 'open' : '';
         
-        // Master Row
+        // Master Row - entire row click toggles map visibility; chevron expands/collapses
+        const swatchClass = visible[r.vehicle_id] ? '' : 'hidden';
         html += `
-            <tr class="route-row ${activeClass}" id="route-row-${r.vehicle_id}" onclick="selectRoute(${r.vehicle_id})">
+            <tr class="route-row ${activeClass}" id="route-row-${r.vehicle_id}" onclick="handleRowClick(event, ${r.vehicle_id})">
                 <td class="col-center"><span class="expand-btn" id="chev-${r.vehicle_id}" onclick="toggleAccordion(event, ${r.vehicle_id})">${chevron}</span></td>
-                <td class="checkbox-cell" onclick="event.stopPropagation()">
-                    <input type="checkbox" class="route-cb" data-id="${r.vehicle_id}" ${checkedStr} onchange="toggleRouteVisibility(${r.vehicle_id}, this.checked)">
+                <td class="col-center">
+                    <div class="color-swatch swatch-toggle ${swatchClass}" style="background-color: ${r.ui_color}" title="Click row to show/hide on map" aria-label="Route V-${r.vehicle_id} ${visible[r.vehicle_id] ? 'visible' : 'hidden'} on map"></div>
                 </td>
-                <td class="col-center"><div class="color-swatch" style="background-color: ${r.ui_color}"></div></td>
                 <td>V-${r.vehicle_id}</td>
                 <td class="hide-on-expand">${r.start_time}</td>
                 <td class="hide-on-expand">${r.end_time}</td>
@@ -769,7 +770,7 @@ function renderRouteTable() {
         // Detail (Accordion) Row
         html += `
             <tr class="details-row ${openClass}" id="details-row-${r.vehicle_id}">
-                <td colspan="13" style="padding: 0;">
+                <td colspan="12" style="padding: 0;">
                     ${generateStopsTableHTML(r)}
                 </td>
             </tr>
@@ -882,15 +883,10 @@ function toggleMapExpand() {
   container.classList.toggle('map-expanded');
   const btn = document.getElementById('btnExpandMap');
   
-  // Also toggle whether the header checkbox is visible so users can select all in expanded view
-  const headerCb = document.getElementById('checkAllRoutesHeader').parentElement;
-  
   if (container.classList.contains('map-expanded')) {
       btn.innerHTML = 'Collapse Map &raquo;';
-      headerCb.classList.remove('hide-on-expand');
   } else {
       btn.innerHTML = '&laquo; Expand Map';
-      headerCb.classList.add('hide-on-expand');
   }
   // Delay slightly to allow CSS transition to finish before invalidating map size
   setTimeout(() => { if(map) map.invalidateSize(); }, 400);
@@ -907,6 +903,13 @@ function switchTab(tabId) {
     
     const panel = document.getElementById(`tab-${tabId}`);
     if(panel) panel.classList.add('active');
+}
+
+function handleRowClick(event, vehicle_id) {
+    // Chevron uses stopPropagation, so this runs only when clicking the row (not chevron)
+    const show = !visible[vehicle_id];
+    toggleRouteVisibility(vehicle_id, show);
+    renderRouteTable();
 }
 
 function toggleRouteVisibility(vid, show) {

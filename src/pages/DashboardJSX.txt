@@ -3,7 +3,6 @@
 <div className="dashboard-toolbar">
   <div className="brand">
     <span className="brand-title">McKesson Optimizer</span>
-    <span className="brand-subtitle">Dispatch Intelligence</span>
   </div>
   
   <div className="metrics-container" id="metricsRow">
@@ -45,12 +44,10 @@
     <div className="panel active" id="tab-dashboard">
       <div className="panel-header">
         <span>Route Summary & Sequence Info</span>
-        <div>
-           <label className="hide-on-expand" style={{marginRight: '12px', cursor: 'pointer', fontWeight: 'normal', textTransform: 'none'}}>
-             <input type="checkbox" id="checkAllRoutesHeader" checked title="Toggle all routes" onChange="document.getElementById('checkAllRoutes').click();" style={{verticalAlign: 'middle'}}>
-             All
-           </label>
-           <span id="routeTotals" style={{fontWeight: 'normal', textTransform: 'none'}}></span>
+        <div className="panel-header-actions">
+           <button type="button" className="panel-btn visibility-btn" id="btnShowAll" title="Show all routes on map">Show all</button>
+           <button type="button" className="panel-btn visibility-btn" id="btnHideAll" title="Hide all routes from map">Hide all</button>
+           <span id="routeTotals" style={{fontWeight: 'normal', textTransform: 'none', marginLeft: '8px'}}></span>
         </div>
       </div>
       <div className="grid-container">
@@ -58,7 +55,6 @@
           <thead>
             <tr>
               <th style={{width: '24px'}}></th> 
-              <th className="checkbox-cell" style={{width: '24px'}}><input type="checkbox" id="checkAllRoutes" checked title="Toggle all routes"></th>
               <th style={{width: '40px'}}>Color</th>
               <th style={{width: '60px', cursor: 'pointer'}} onClick="sortTable('id')" data-col="id">ID<span className="sort-arrow">↕</span></th>
               <th style={{width: '70px', cursor: 'pointer'}} className="hide-on-expand" onClick="sortTable('start')" data-col="start">Start<span className="sort-arrow">↕</span></th>

@@ -9,8 +9,14 @@ function AppRoutes() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#FCEFE5] border-t-[#0B3B32]"></div>
+      <div className="flex min-h-screen items-center justify-center bg-app-bg">
+        <div className="flex flex-col items-center gap-4 rounded-[28px] border border-[rgba(255,255,255,0.72)] bg-[rgba(255,255,255,0.8)] px-8 py-7 shadow-card backdrop-blur">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-soft border-t-brand"></div>
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand">ziing.ai</p>
+            <p className="mt-1 text-sm font-medium text-ink-base">Loading workspace</p>
+          </div>
+        </div>
       </div>
     );
   }
