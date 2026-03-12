@@ -1,0 +1,120 @@
+
+
+<div className="dashboard-toolbar">
+  <div className="brand">
+    <span className="brand-title">McKesson Optimizer</span>
+    <span className="brand-subtitle">Dispatch Intelligence</span>
+  </div>
+  
+  <div className="metrics-container" id="metricsRow">
+    <div className="metric-card">
+      <span className="metric-label">Vehicles</span>
+      <span className="metric-value" id="valVehicles">0</span>
+    </div>
+    <div className="metric-card">
+      <span className="metric-label">Total Stops</span>
+      <span className="metric-value" id="valStops">0</span>
+    </div>
+    <div className="metric-card">
+      <span className="metric-label">Distance</span>
+      <span className="metric-value" id="valDist">0 km</span>
+    </div>
+    <div className="metric-card">
+      <span className="metric-label">Total Weight</span>
+      <span className="metric-value" id="valWeight">0 kg</span>
+    </div>
+    <div className="metric-card danger" id="cardUnassigned" style={{display: 'none'}}>
+      <span className="metric-label">Unassigned</span>
+      <span className="metric-value" id="valUnassigned">0</span>
+    </div>
+  </div>
+</div>
+
+<div className="split-container">
+  
+  
+  <div className="left-pane">
+    
+    
+    <div className="tabs">
+      <div className="tab active" onClick="switchTab('dashboard')">Route Dashboard</div>
+      <div className="tab" onClick="switchTab('unassigned')">Unassigned Orders (<span id="tabUaCount">0</span>)</div>
+    </div>
+
+    
+    <div className="panel active" id="tab-dashboard">
+      <div className="panel-header">
+        <span>Route Summary & Sequence Info</span>
+        <div>
+           <label className="hide-on-expand" style={{marginRight: '12px', cursor: 'pointer', fontWeight: 'normal', textTransform: 'none'}}>
+             <input type="checkbox" id="checkAllRoutesHeader" checked title="Toggle all routes" onChange="document.getElementById('checkAllRoutes').click();" style={{verticalAlign: 'middle'}}>
+             All
+           </label>
+           <span id="routeTotals" style={{fontWeight: 'normal', textTransform: 'none'}}></span>
+        </div>
+      </div>
+      <div className="grid-container">
+        <table id="routeTable">
+          <thead>
+            <tr>
+              <th style={{width: '24px'}}></th> 
+              <th className="checkbox-cell" style={{width: '24px'}}><input type="checkbox" id="checkAllRoutes" checked title="Toggle all routes"></th>
+              <th style={{width: '40px'}}>Color</th>
+              <th style={{width: '60px', cursor: 'pointer'}} onClick="sortTable('id')" data-col="id">ID<span className="sort-arrow">↕</span></th>
+              <th style={{width: '70px', cursor: 'pointer'}} className="hide-on-expand" onClick="sortTable('start')" data-col="start">Start<span className="sort-arrow">↕</span></th>
+              <th style={{width: '70px', cursor: 'pointer'}} className="hide-on-expand" onClick="sortTable('end')" data-col="end">End<span className="sort-arrow">↕</span></th>
+              <th style={{width: '50px', cursor: 'pointer'}} className="col-right" onClick="sortTable('stops')" data-col="stops">Stops<span className="sort-arrow">↕</span></th>
+              <th style={{width: '70px', cursor: 'pointer'}} className="col-right" onClick="sortTable('dist')" data-col="dist">Dist (km)<span className="sort-arrow">↕</span></th>
+              <th style={{width: '70px', cursor: 'pointer'}} className="col-right hide-on-expand" onClick="sortTable('runtime')" data-col="runtime">Total Time<span className="sort-arrow">↕</span></th>
+              <th style={{width: '70px', cursor: 'pointer'}} className="col-right hide-on-expand" onClick="sortTable('svc')" data-col="svc">Svc Time<span className="sort-arrow">↕</span></th>
+              <th style={{width: '80px', cursor: 'pointer'}} className="col-right" onClick="sortTable('weight')" data-col="weight">Weight (kg)<span className="sort-arrow">↕</span></th>
+              <th style={{width: '80px', cursor: 'pointer'}} className="col-right hide-on-expand" onClick="sortTable('vol')" data-col="vol">Vol (in³)<span className="sort-arrow">↕</span></th>
+              <th style={{width: '60px', cursor: 'pointer'}} className="col-right" onClick="sortTable('pieces')" data-col="pieces">Pieces<span className="sort-arrow">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="routeTableBody"></tbody>
+          <tfoot id="routeTableFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+
+    
+    <div className="panel" id="tab-unassigned">
+      <div className="panel-header">
+        <span>Unassigned Orders</span>
+      </div>
+      <div className="grid-container">
+        <table id="unassignedTable">
+          <thead>
+            <tr>
+              <th style={{width: '60px'}}>ID</th>
+              <th style={{width: '140px'}}>Name</th>
+              <th style={{width: '180px'}}>Address</th>
+              <th style={{width: '60px'}} className="col-right">Weight</th>
+              <th style={{width: '60px'}} className="col-right">Vol (in³)</th>
+              <th style={{width: '60px'}} className="col-right">Pieces</th>
+            </tr>
+          </thead>
+          <tbody id="unassignedTableBody"></tbody>
+          <tfoot id="unassignedTableFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <div className="right-pane">
+    <div className="panel-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <span style={{marginRight: '12px'}}>Map View</span>
+        <button className="panel-btn" onClick="zoomMapToAll()">Zoom All</button>
+        <button className="panel-btn" onClick="zoomMapHub()">Zoom Hub</button>
+      </div>
+      <button className="panel-btn emphasize" id="btnExpandMap" onClick="toggleMapExpand()">&laquo; Expand Map</button>
+    </div>
+    <div id="map"></div>
+  </div>
+
+</div>
+

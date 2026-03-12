@@ -3,7 +3,7 @@ import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -26,21 +26,12 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 flex flex-col items-center justify-center -mt-20">
-        <div className="bg-white p-10 rounded-xl shadow-md border border-gray-100 text-center max-w-lg w-full">
-          <div className="w-16 h-16 bg-[#FCEFE5] rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-2xl font-bold text-[#0B3B32]">
-              {user?.email?.charAt(0).toUpperCase() || 'U'}
-            </span>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome Back!</h2>
-          <p className="text-gray-500 mb-6">You have successfully logged in.</p>
-          
-          <div className="bg-gray-50 p-4 rounded-lg inline-block w-full">
-            <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Signed in as</p>
-            <p className="font-medium text-gray-800 truncate">{user?.email}</p>
-          </div>
-        </div>
+      <main className="flex-1 w-full bg-white relative overflow-hidden">
+        <iframe 
+          src="/mckesson.html" 
+          title="McKesson Optimizer Dashboard"
+          className="w-full h-full border-0 absolute inset-0"
+        />
       </main>
     </div>
   );
