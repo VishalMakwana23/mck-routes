@@ -3,10 +3,11 @@ function generateStopsTableHTML(r) {
         return `
             <tr>
                 <td class="col-center" style="width: 40px">${s.seq}</td>
+                <td class="col-num" style="width: 70px">${s.customer_id}</td>
                 <td title="${s.name}">${cleanName(s.name)}</td>
                 <td title="${s.address}">${s.address}</td>
                 <td class="col-num" style="width: 60px">${s.weight_kg}</td>
-                <td class="col-num" style="width: 60px">${fmtNum(s.volume_in3)}</td>
+                <td class="col-num" style="width: 60px">${s.volume_m3}</td>
                 <td class="col-num" style="width: 50px">${s.pieces}</td>
                 <td class="col-num" style="width: 60px">${s.service_min}</td>
             </tr>
@@ -20,11 +21,12 @@ function generateStopsTableHTML(r) {
                 <thead>
                     <tr>
                         <th style="width: 40px" class="col-center">Seq</th>
+                        <th style="width: 70px" class="col-right">Cust ID</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th style="width: 60px" class="col-right">Weight</th>
                         <th style="width: 60px" class="col-right">Volume</th>
-                        <th style="width: 50px" class="col-right">Pieces</th>
+                        <th style="width: 50px" class="col-right">Qty</th>
                         <th style="width: 60px" class="col-right">Svc Min</th>
                     </tr>
                 </thead>
@@ -72,7 +74,7 @@ function renderRouteTable() {
                 <td class="col-num hide-on-expand">${Math.floor((r.duration_min+r.service_min)/60)}h ${Math.round((r.duration_min+r.service_min)%60)}m</td>
                 <td class="col-num hide-on-expand">${Math.floor(r.service_min/60)}h ${r.service_min%60}m</td>
                 <td class="col-num">${fmtNum(r.total_weight_kg)}</td>
-                <td class="col-num hide-on-expand">${fmtNum(r.total_volume_in3)}</td>
+                <td class="col-num hide-on-expand">${fmtNum(r.total_volume_m3)}</td>
                 <td class="col-num">${r.total_pieces}</td>
             </tr>
         `;
@@ -100,7 +102,7 @@ function renderUnassignedTable() {
     let uw=0, uv=0, up=0;
     tbody.innerHTML = UNASSIGNED.map(u => {
         uw += (u.weight_kg || 0);
-        uv += (u.volume_in3 || 0);
+        uv += (u.volume_m3 || 0);
         up += (u.pieces || 0);
         return `
             <tr title="${u.address || 'No address'}" style="cursor: pointer;" onclick="${u.lat != null ? `map.setView([${u.lat},${u.lon}], 16)` : ''}">
@@ -108,7 +110,7 @@ function renderUnassignedTable() {
                 <td title="${u.name || ''}">${cleanName(u.name) || ''}</td>
                 <td title="${u.address || ''}">${u.address || ''}</td>
                 <td class="col-num">${u.weight_kg}</td>
-                <td class="col-num">${u.volume_in3 || 0}</td>
+                <td class="col-num">${u.volume_m3 || 0}</td>
                 <td class="col-num">${u.pieces || 0}</td>
             </tr>
         `;

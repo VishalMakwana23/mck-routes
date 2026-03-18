@@ -43,7 +43,7 @@ function sortTable(col) {
             case 'runtime': valA = a.duration_min; valB = b.duration_min; break;
             case 'svc': valA = a.service_min; valB = b.service_min; break;
             case 'weight': valA = a.total_weight_kg; valB = b.total_weight_kg; break;
-            case 'vol': valA = a.total_volume_in3; valB = b.total_volume_in3; break;
+            case 'vol': valA = a.total_volume_m3; valB = b.total_volume_m3; break;
             case 'pieces': valA = a.total_pieces; valB = b.total_pieces; break;
         }
         
