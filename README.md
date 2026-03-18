@@ -1,4 +1,4 @@
-# React Supabase Auth App
+# McKesson Route Planning
 
 This project is a React web application built with Vite and TailwindCSS, implementing authentication via Supabase.
 
