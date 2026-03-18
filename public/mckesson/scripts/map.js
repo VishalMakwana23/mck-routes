@@ -39,12 +39,13 @@ function init() {
       }).addTo(lg);
 
       marker.bindPopup(`
-        <div class="popup-header">[${s.seq}] ${cleanName(s.name)}</div>
+        <div class="popup-header">Stop #${s.seq} — ${cleanName(s.name)}</div>
+        <div class="popup-row"><span>Customer ID:</span> <b>${s.customer_id}</b></div>
         <div class="popup-row"><span>Address:</span> <b>${s.address}</b></div>
         <div class="popup-row"><span>Weight:</span> <b>${s.weight_kg} kg</b></div>
-        <div class="popup-row"><span>Volume:</span> <b>${fmtNum(s.volume_in3)} in³</b></div>
-        <div class="popup-row"><span>Pieces:</span> <b>${s.pieces}</b></div>
-        <div class="popup-row"><span>Vehicle ID:</span> <b>${r.vehicle_id}</b></div>
+        <div class="popup-row"><span>Volume:</span> <b>${s.volume_m3} m³</b></div>
+        <div class="popup-row"><span>Qty:</span> <b>${s.pieces}</b></div>
+        <div class="popup-row"><span>Vehicle:</span> <b>V-${r.vehicle_id}</b></div>
       `);
     });
 
@@ -54,7 +55,7 @@ function init() {
     totalPieces += r.total_pieces;
     totalRun += r.duration_min;
     totalSvc += r.service_min;
-    totalVol += r.total_volume_in3;
+    totalVol += r.total_volume_m3;
   });
 
   // Unassigned markers: Red squares with X
