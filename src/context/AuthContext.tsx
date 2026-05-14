@@ -1,61 +1,43 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from '../services/supabaseClient';
-import type { Session, User } from '@supabase/supabase-js';
+import React, { createContext, useContext, useState } from 'react';
+// import { supabase } from '../services/supabaseClient';
+// import type { Session, User } from '@supabase/supabase-js';
+
+const STATIC_EMAIL = 'demo@ziing.ai';
+const STATIC_PASSWORD = 'eQ25U#{17"^8';
+
+const staticUser = {
+  id: 'static-user-id',
+  email: STATIC_EMAIL,
+} as any;
 
 interface AuthContextType {
-  user: User | null;
-  session: Session | null;
+  user: any;
+  session: any;
   loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
-  getCurrentUser: () => User | null;
+  getCurrentUser: () => any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Determine the current session when context mounts
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Listen to Supabase auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
+  const [user, setUser] = useState<any>(null);
+  const [session, setSession] = useState<any>(null);
+  const [loading] = useState(false);
 
   const login = async (email: string, password: string) => {
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        return { success: false, error: error.message };
-      }
+    if (email === STATIC_EMAIL && password === STATIC_PASSWORD) {
+      setUser(staticUser);
+      setSession({ user: staticUser });
       return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'An unexpected error occurred' };
     }
+    return { success: false, error: 'Invalid email or password' };
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    setUser(null);
+    setSession(null);
   };
 
   const getCurrentUser = () => {
@@ -71,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     getCurrentUser,
   };
 
-  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
